@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   renderCategories();
-  renderScores()
+  renderScores();
 });
 
 //pull category from API
@@ -27,15 +27,31 @@ function addCategoryToBar(category) {
   divEl = document.createElement("div");
   divEl.className = "card";
   divEl.dataset.id = category.id;
+
   divEl.innerHTML = `
-<p>${category.name} </p>
-<img src='${category.image_url}'/>
-`;
+  <p>${category.name} </p>
+  <img src='${category.image_url}'/>
+  `;
+
   quizBar.appendChild(divEl);
   divEl.addEventListener("click", event => {
     state.selectedCategory = category;
     showQuiz(category);
   });
+}
+
+function showQuiz(category) {
+  quizbox.innerHTML = `
+  <h2>${category.name}</h2>
+  <button class='start-quiz' type="button">Start Quiz!</button>
+`;
+
+  const startBtn = document.querySelector(".start-quiz");
+  startBtn.addEventListener("click", event => {
+    newRound();
+    getQuestion();
+  });
+
 }
 
 function getQuestion() {
@@ -45,13 +61,8 @@ function getQuestion() {
   return fetch(`http://localhost:3000/questions/${newnumber}`)
     .then(resp => resp.json())
     .then(question => {
-      // if (question.endOfRound) {
-      //   myEndRoundFunction()
-      // } else {
-      //   renderQuestion(question)
-      // }
 
-      if (state.answers.length > 10) {
+      if (state.answers.length > 9) {
         endRound();
       } else {
         renderQuestion(question);
@@ -60,29 +71,19 @@ function getQuestion() {
 }
 
 function endRound() {
-  createUser()
+  state.answers = []
+  createUser();
   quizbox.innerHTML = `<h2>End of Game. Select a category to restart the quiz.</h2>
   `;
   console.log("end of game");
-  addScore(score)
-  state.currentUser = null
-  state.currentScore = 0
-  state.lives = 3
+  state.lives = 3;
 
+  addScore(state.currentScore);
+  state.currentScore = 0;
+  state.currentUser = null;
 }
 
-function showQuiz(category) {
-  quizbox.innerHTML = `
-  <h2>${category.name}</h2>
 
-<button class='start-quiz' type="button">Start Quiz!</button>
-`;
-  const startBtn = document.querySelector(".start-quiz");
-  startBtn.addEventListener("click", event => {
-    newRound();
-    getQuestion();
-  });
-}
 
 // function quiz(category) {
 //   liEl = document.createElement('li')
@@ -104,12 +105,8 @@ function renderQuestion(question) {
   quizbox.innerHTML = `
   <p>${question.content}</p>
   <form id="form">
-  <input type="radio" name="test" value='correct'>   ${
-    question.answer
-  }<br>
-  <input type="radio" name="test" value='incorrect'> ${
-    question.incorrect_1
-  }<br>
+  <input type="radio" name="test" value='correct'>   ${question.answer}<br>
+  <input type="radio" name="test" value='incorrect'> ${question.incorrect_1}<br>
   </form>
   <br><br><br><br><br>
 
@@ -125,16 +122,19 @@ function renderQuestion(question) {
 
   submitBtn.addEventListener("click", event => {
     const providedAnswer = form.test.value;
+
     createAnswer(providedAnswer, question);
+    state.answers.push(providedAnswer);
     if (providedAnswer === "incorrect") {
-      --state.lives
+      --state.lives;
     } else {
-      ++state.currentScore
+      ++state.currentScore;
     }
-    if (state.lives === 0) {
-      endRound()
+
+    if (state.answers.length > 9 || state.lives === 0 ) {
+      endRound();
     } else {
-      getQuestion()
+      getQuestion();
     }
 
   });
@@ -145,6 +145,7 @@ function renderQuestion(question) {
 // }
 
 function newRound() {
+  state.answers = []
   let text;
   const player = prompt("Please Enter Your Name");
   if (player == null || player == "") {
@@ -152,12 +153,12 @@ function newRound() {
   } else {
     text = `Hello ${player}`;
   }
-  state.currentUser = player
+  state.currentUser = player;
   createRound(player);
   //state.currentRound = Round.id
 }
 
-// post new player to api
+// post new player to backend
 function createRound(player) {
   return fetch("http://localhost:3000/rounds", {
     method: "POST",
@@ -179,7 +180,7 @@ function createAnswer(providedAnswer, question) {
     body: JSON.stringify({ answer: providedAnswer, question_id: question.id })
   })
     .then(resp => resp.json())
-    .then(resp => state.answers.push(resp.answer));
+    // .then(resp => state.answers.push(resp.answer));
 }
 
 function createUser() {
@@ -189,34 +190,33 @@ function createUser() {
       "Content-Type": "application/json",
       Accept: "application/json"
     },
-    body: JSON.stringify({ name: state.currentUser, points: state.currentScore })
-  })
-    .then(resp => resp.json())
+    body: JSON.stringify({
+      name: state.currentUser,
+      points: state.currentScore
+    })
+  }).then(resp => resp.json());
 }
-
 
 function checkAnswers() {
   console.log(form.test.value);
 }
 
 function addScore(score) {
-const li = document.createElement('li')
-li.innerHTML = `
+  const li = document.createElement("li");
+  li.innerHTML = `
 ${score.name} Scored ${score.points}
-`
-leaderTable.append(li)
+`;
+  leaderTable.append(li);
+  getScores()
 }
 
 function getScores() {
-  return fetch('http://localhost:3000/scores')
-  .then(resp => resp.json())
+  return fetch("http://localhost:3000/scores").then(resp => resp.json());
 }
 
 function renderScores() {
-getScores().then(scores => scores.forEach(addScore));
+  getScores().then(scores => scores.forEach(addScore));
 }
-
-
 
 //   quizbox.innerHTML = state.selectedCategory.questions
 //     .map(function(e) {
