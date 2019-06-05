@@ -29,8 +29,8 @@
     divEl.dataset.id = category.id;
 
     divEl.innerHTML = `
-    <p>${category.name} </p>
-    <img src='${category.image_url}'/>
+    <img className = "categoryImage" src='${category.image_url}'/>
+    
     `;
 
     quizBar.appendChild(divEl);
@@ -191,7 +191,7 @@
         points: state.currentScore
       })
     }).then(resp => resp.json())
-      .then(resp => addScore(resp))
+      .then(score => addScore(score))
   }
 
   function checkAnswers() {
@@ -200,7 +200,7 @@
 
   function addScore(score) {
     const li = document.createElement("li");
-    
+
     li.innerHTML = `
   ${score.name} Scored ${score.points}
   `;

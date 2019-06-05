@@ -15,10 +15,10 @@
 }
 
 #quiz-bar {
-  height: 15vh;
+  height: 20vh;
   background: red;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -70,19 +70,21 @@
 }
 
 .card {
-  object-fit: contain;
   max-width:100%;
-  max-height:100%;
+  max-height:65%;
   text-align: left;
   border: grey solid 1px;
   padding: 1rem;
-  width: 15rem;
-  height: 25rem;
-  display: inline-grid;
-  margin: 1rem 2rem;
+
   box-shadow: 3px 4px #e04b52;
-  display: inline-flex;
-  flex-direction: row;
+  display: inline-flex
+
+}
+
+.card img {
+  object-fit: contain;
+
+
 }
 
 .start-quiz {
