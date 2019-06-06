@@ -71,13 +71,23 @@
   function endRound() {
     state.answers = [];
     createUser();
-    quizbox.innerHTML = `<h2>End of Game. Select a category to restart the quiz.</h2>
+    quizbox.innerHTML = `<h2>End of Game. Play Again?</h2>
     `;
     console.log("end of game");
     state.lives = 3;
 
-    // renderScores()
-    // addScore();
+    const restartBtn = document.createElement("button");
+    restartBtn.type = "button"
+    restartBtn.className = "btn btn-light";
+    restartBtn.setAttribute("type", "submit");
+    restartBtn.innerText = 'Restart Quiz'
+    restartBtn.addEventListener("click", event => {
+      showQuiz(state.selectedCategory);
+    });
+    quizbox.append(restartBtn)
+
+
+
 
     state.currentScore = 0;
     state.currentUser = null;
@@ -207,7 +217,7 @@
 
   function addScore(score) {
     const li = document.createElement("li");
-
+    li.id = "score-entries"
     li.innerHTML = `
   ${score.name} Scored ${score.points}
   `;
