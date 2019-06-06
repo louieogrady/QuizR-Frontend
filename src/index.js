@@ -43,10 +43,10 @@
   function showQuiz(category) {
     quizbox.innerHTML = `
     <h2>${category.name}</h2>
-    <button class='start-quiz' type="button">Start Quiz!</button>
+    <button class="btn btn-light" id="start-quiz-btn" type="button">Start Quiz! </button>
   `;
 
-    const startBtn = document.querySelector(".start-quiz");
+    const startBtn = document.querySelector("#start-quiz-btn");
     startBtn.addEventListener("click", event => {
       newRound();
       getQuestion();
@@ -113,9 +113,10 @@
     `;
 
     const submitBtn = document.createElement("button");
-    submitBtn.className = "submit";
+    submitBtn.type = "button"
+    submitBtn.className = "btn btn-light";
     submitBtn.setAttribute("type", "submit");
-    submitBtn.innerText = "Submit Answers";
+    submitBtn.innerText = "Submit Answer";
     quizbox.append(submitBtn);
 
     submitBtn.addEventListener("click", event => {

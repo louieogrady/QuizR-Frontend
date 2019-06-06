@@ -26,14 +26,30 @@ body {
 
 #quiz-summary-container {
   width: 450px;
-	height: 350px;
-  border: solid;
+	height: 360px;
+  border: grey solid 1px;
 	position: absolute;
 	top:0;
 	bottom: 0;
 	left: 0;
 	right: 500px;
 	margin: auto;
+}
+
+#start-quiz-btn {
+  margin: 20px
+}
+
+#table {
+  width: 450px;
+  height: 360px;
+  border: grey solid 1px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 500px;
+  right: 0;
+  margin: auto;
 }
 
 #quiz-info {
@@ -47,18 +63,7 @@ body {
   max-height: 25vw;
 }
 
-#table {
-  width: 450px;
-  height: 350px;
-  border: solid;
-  position: absolute;
-  top:0;
-  bottom: 0;
-  left: 500px;
-  right: 0;
 
-  margin: auto;
-}
 
 #leaderboard-header {
   font-size: 20px;
