@@ -43,18 +43,23 @@ body {
   margin-left: 10.6rem
 }
 
+#restart-quiz-btn {
+  width: auto;
+  margin-left: 10.6rem
+}
+
 #table {
-  width: 200px;
+  width: 211px;
   height: 100%;
   border: grey solid 1px;
   margin-left: 900px;
   margin-top: 50px;
-
 }
 
 #table li {
   white-space: nowrap;
-  display:inline-block
+  display:inline-block;
+
 }
 
 #score-entries {

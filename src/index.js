@@ -27,10 +27,8 @@
     divEl = document.createElement("div");
     divEl.className = "card";
     divEl.dataset.id = category.id;
-
     divEl.innerHTML = `
     <img class = "category-image" src='${category.image_url}'/>
-
     `;
 
     quizBar.appendChild(divEl);
@@ -77,7 +75,8 @@
     state.lives = 3;
 
     const restartBtn = document.createElement("button");
-    restartBtn.type = "button"
+    restartBtn.type = "button";
+    restartBtn.id = "restart-quiz-btn";
     restartBtn.className = "btn btn-light";
     restartBtn.setAttribute("type", "submit");
     restartBtn.innerText = 'Restart Quiz'
@@ -86,24 +85,9 @@
     });
     quizbox.append(restartBtn)
 
-
-
-
     state.currentScore = 0;
     state.currentUser = null;
   }
-
-  // function quiz(category) {
-  //   liEl = document.createElement('li')
-  //   liEl.innerHTML = `
-  //   ${category.questions[0].content}
-  //   <br>  <br>  <br>  <br>
-  //   <form action="">
-  //   <input type="radio" value= 'correct'> ${category.questions[0].answer}<br>
-  //   <input type="radio" value= 'incorrect'> ${category.questions[0].incorrect_1}<br>
-  // </form>
-  //   `
-  // }
 
   function renderCategories() {
     getCategory().then(categories => categories.forEach(addCategoryToBar));
@@ -223,14 +207,6 @@
     `;
     leaderTable.append(li);
   }
-
-  // function addScores(score) {
-  //   const li = document.createElement("li");
-  //   li.innerHTML = `
-  // ${score.name} Scored ${score.points}
-  // `;
-  //   leaderTable.append(li);
-  // }
 
   function getScores() {
     return fetch("http://localhost:3000/scores").then(resp => resp.json());
