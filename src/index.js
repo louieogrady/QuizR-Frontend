@@ -34,16 +34,17 @@
 
     quizBar.appendChild(divEl);
     divEl.addEventListener("click", event => {
-      state.selectedCategory = category;
-      state.questions = []
-      state.currentScore = 0,
-      state.answers = [],
-      state.lives = 3,
+
       showQuiz(category);
     });
   }
 
   function showQuiz(category) {
+    state.selectedCategory = category;
+    state.questions = []
+    state.currentScore = 0,
+    state.answers = [],
+    state.lives = 3,
     quizbox.innerHTML = `
     <h2>${category.name}</h2>
     <button class="btn btn-light" id="start-quiz-btn" type="button">Start Quiz! </button>
@@ -67,7 +68,7 @@
           endRound();
         } else {
           renderQuestion(question);
-          state.questions.push(question)
+          state.questions.push(question.id)
         }
       });
   }
@@ -101,10 +102,10 @@
   }
 
   function renderQuestion(question) {
-    debugger
-    while (state.questions.includes(question)) {
+
+    if (state.questions.includes(question.id)) {
       getQuestion();
-    }
+    } else {
 
     // randomised radio buttons - ensures answers aren't always in the same position
     const shuffle = Math.floor(Math.random() * 20) + 1
@@ -164,6 +165,7 @@
         getQuestion();
       }
     })
+  }
   }
 
   function valReq(val) {
