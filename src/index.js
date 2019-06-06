@@ -30,7 +30,7 @@
 
     divEl.innerHTML = `
     <img className = "categoryImage" src='${category.image_url}'/>
-    
+
     `;
 
     quizBar.appendChild(divEl);
@@ -140,16 +140,29 @@
   // function newQuestion() {
   //   getQuestion().then(question => renderQuestion(question))
   // }
+  //
+  //
+
+
+  function valReq(val) {
+    return (val);
+  }
+
+  function valString(val) {
+    return (isNaN(val));
+  }
 
   function newRound() {
     state.answers = [];
     let text;
-    const player = prompt("Please Enter Your Name");
-    if (player == null || player == "") {
-      text = "Please enter a name";
-    } else {
-      text = `Hello ${player}`;
+    let player;
+    let valid=false;
+
+    while(!valid) {
+    	player = prompt("Please enter your name");
+    	valid = (valReq(player) && valString(player));
     }
+
     state.currentUser = player;
     createRound(player);
     //state.currentRound = Round.id

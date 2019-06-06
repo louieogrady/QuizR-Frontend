@@ -1,22 +1,6 @@
-#filter-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: skyblue;
-
-}
-
-#good-dog-filter {
-  margin-top: 1vh;
-  width: 35vw;
-  font-size: 1em;
-  height: 5vh;
-  border-radius: 3em;
-}
-
 #quiz-bar {
-  height: 20vh;
-  background: red;
+  height: 25vh;
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,12 +12,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 2em;
-  border: 1px solid red;
+  border-radius: 1em;
+}
+
+.header {
+  margin: 15px
+  font-size: 29px
+}
+
+body {
+  background: #01ED87
 }
 
 #quiz-summary-container {
-  width: 400px;
+  width: 450px;
 	height: 350px;
   border: solid;
 	position: absolute;
@@ -41,7 +33,6 @@
 	bottom: 0;
 	left: 0;
 	right: 500px;
-
 	margin: auto;
 }
 
@@ -57,7 +48,7 @@
 }
 
 #table {
-  width: 400px;
+  width: 420px;
   height: 350px;
   border: solid;
   position: absolute;
@@ -69,6 +60,10 @@
   margin: auto;
 }
 
+#leaderboard-header {
+
+}
+
 .card {
   max-width:100%;
   max-height:65%;
@@ -76,7 +71,7 @@
   border: grey solid 1px;
   padding: 1rem;
 
-  box-shadow: 3px 4px #e04b52;
+  box-shadow: 3px 4px grey;
   display: inline-flex
 
 }
