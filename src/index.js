@@ -16,7 +16,8 @@
     currentQuestion: null,
     answers: [],
     lives: 3,
-    currentUser: null
+    currentUser: null,
+    questions: []
   };
 
   function getCategory() {
@@ -34,6 +35,10 @@
     quizBar.appendChild(divEl);
     divEl.addEventListener("click", event => {
       state.selectedCategory = category;
+      state.questions = []
+      state.currentScore = 0,
+      state.answers = [],
+      state.lives = 3,
       showQuiz(category);
     });
   }
@@ -62,6 +67,7 @@
           endRound();
         } else {
           renderQuestion(question);
+          state.questions.push(question)
         }
       });
   }
@@ -73,6 +79,7 @@
     `;
     console.log("end of game");
     state.lives = 3;
+    state.questions = []
 
     const restartBtn = document.createElement("button");
     restartBtn.type = "button";
@@ -94,9 +101,13 @@
   }
 
   function renderQuestion(question) {
+    debugger
+    while (state.questions.includes(question)) {
+      getQuestion();
+    }
 
+    // randomised radio buttons - ensures answers aren't always in the same position
     const shuffle = Math.floor(Math.random() * 20) + 1
-
     if (shuffle > 10) {
       quizbox.innerHTML = `
 
@@ -152,7 +163,7 @@
       } else {
         getQuestion();
       }
-    });
+    })
   }
 
   function valReq(val) {
