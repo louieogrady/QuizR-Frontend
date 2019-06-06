@@ -29,7 +29,7 @@
     divEl.dataset.id = category.id;
 
     divEl.innerHTML = `
-    <img className = "categoryImage" src='${category.image_url}'/>
+    <img class = "category-image" src='${category.image_url}'/>
 
     `;
 
@@ -136,13 +136,6 @@
       }
     });
   }
-
-  // function newQuestion() {
-  //   getQuestion().then(question => renderQuestion(question))
-  // }
-  //
-  //
-
 
   function valReq(val) {
     return (val);

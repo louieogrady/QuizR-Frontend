@@ -48,7 +48,7 @@ body {
 }
 
 #table {
-  width: 420px;
+  width: 450px;
   height: 350px;
   border: solid;
   position: absolute;
@@ -61,25 +61,22 @@ body {
 }
 
 #leaderboard-header {
-
+  font-size: 20px;
 }
 
 .card {
   max-width:100%;
-  max-height:65%;
+  max-height:100%;
   text-align: left;
   border: grey solid 1px;
-  padding: 1rem;
-
   box-shadow: 3px 4px grey;
   display: inline-flex
 
 }
 
-.card img {
+.category-image {
+  width: 20rem;
   object-fit: contain;
-
-
 }
 
 .start-quiz {
