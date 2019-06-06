@@ -219,8 +219,8 @@
     const li = document.createElement("li");
     li.id = "score-entries"
     li.innerHTML = `
-  ${score.name} Scored ${score.points}
-  `;
+    ${score.name} Scored ${score.points}
+    `;
     leaderTable.append(li);
   }
 
