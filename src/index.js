@@ -94,17 +94,40 @@
   }
 
   function renderQuestion(question) {
-    quizbox.innerHTML = `
-    <p>${question.content}</p>
-    <form id="form">
-    <input type="radio" name="test" value='correct'>   ${question.answer}<br>
-    <input type="radio" name="test" value='incorrect'> ${question.incorrect_1}<br>
-    </form>
-    <br><br><br><br><br>
 
-    <p>Current score: ${state.currentScore}</p>
-    <p>Current Lives: ${state.lives}</p>
-    `;
+    const shuffle = Math.floor(Math.random() * 20) + 1
+
+    if (shuffle > 10) {
+      quizbox.innerHTML = `
+
+      <p>${question.content}</p>
+      <form id="form">
+      <div id="answers-div">
+      <input id="answers" type="radio" name="test" value='correct'>   ${question.answer}<br>
+      <input id="answers" type="radio" name="test" value='incorrect'> ${question.incorrect_1}<br>
+      </div>
+      </form>
+      <br><br><br><br><br>
+
+      <p>Current score: ${state.currentScore}</p>
+      <p>Current Lives: ${state.lives}</p>
+      `;
+    } else {
+      quizbox.innerHTML = `
+
+      <p>${question.content}</p>
+      <form id="form">
+      <div id="answers-div">
+      <input id="answers" type="radio" name="test" value='incorrect'> ${question.incorrect_1}<br>
+      <input id="answers" type="radio" name="test" value='correct'>   ${question.answer}<br>
+      </div>
+      </form>
+      <br><br><br><br><br>
+
+      <p>Current score: ${state.currentScore}</p>
+      <p>Current Lives: ${state.lives}</p>
+      `;
+    }
 
     const submitBtn = document.createElement("button");
     submitBtn.type = "button"
