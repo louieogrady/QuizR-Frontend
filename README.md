@@ -6,4 +6,4 @@ This is the repository for the frontend. [Click here to visit the backend repo ]
 
 Sports QuizR is built using Javascript and Ruby on Rails.
 
-![](sports-quizr.gif) | =250x250)
+![](sports-quizr.gif) =250x250)
